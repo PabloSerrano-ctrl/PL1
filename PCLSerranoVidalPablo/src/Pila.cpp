@@ -1,4 +1,6 @@
 #include "Pila.hpp"
+#include "Proceso.hpp"
+using namespace std;
 
 Pila::Pila(){
     ultimo = NULL;
