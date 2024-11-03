@@ -1,3 +1,5 @@
+#ifndef NODOPILA_HPP
+#define NODOPILA_HPP
 #include <iostream>
 #include "Proceso.hpp"
 using namespace std;
@@ -13,3 +15,5 @@ private:
     friend class Pila;
 };
 typedef NodoPila* pnodoPila;
+
+#endif  //NODOPILA
