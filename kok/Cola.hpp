@@ -8,6 +8,8 @@ class Cola {
 private:
     NodoCola* frente;
     NodoCola* fin;
+	int longitud;
+	
 
 public:
     Cola();
@@ -18,6 +20,8 @@ public:
     bool estaVacia() const;
     void mostrar() const;
     void vaciar();
+	int getlongitud();
+	
 };
 
 #endif // COLA_HPP

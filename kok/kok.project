@@ -94,6 +94,8 @@
   </Settings>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="Header File">
+      <File Name="Lista.hpp"/>
+      <File Name="NodoLista.hpp"/>
       <File Name="NodoCola.hpp"/>
       <File Name="Cola.hpp"/>
       <File Name="Gestor.hpp"/>
@@ -102,6 +104,8 @@
       <File Name="Pila.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Source File">
+      <File Name="Lista.cpp"/>
+      <File Name="NodoLista.cpp"/>
       <File Name="NodoCola.cpp"/>
       <File Name="Cola.cpp"/>
       <File Name="Gestor.cpp"/>

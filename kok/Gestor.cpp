@@ -12,14 +12,16 @@ Gestor::Gestor()
 {
 }
 void Gestor::genera12Procesos(){
+	
 	for (int i = 0; i < 12; ++i) {
             int pid = 300 + rand() % 700;
             string usuario = "Usuario" + to_string(rand() % 100);
             bool tiempoReal = rand() % 2;
             Proceso* proceso = new Proceso(pid, usuario, tiempoReal);
             pila.insertar(proceso);
+			
 	}
-	
+	 
 }
 int Gestor::ProcesosEnPila(){
 	return pila.obtenerLongitud();
@@ -31,30 +33,70 @@ void Gestor::muestraProcesos(){
 void Gestor::borraProcesosPila(){
 	return pila.vaciar();
 }
-void Gestor:: encolarProcesos(){
-        while (!pila.estaVacia()) {
-            Proceso* p = pila.pop();
-            if (p->getTipo()) {
-                (gpu2.estaVacia() || gpu2.desencolar() ? gpu2 : gpu3).encolar(p);
+void Gestor::encolarProcesos() {
+    while (!pila.estaVacia()) {
+        // Extraemos un proceso de la pila
+        Proceso* p = pila.pop();
+        // Cambiamos el estado del proceso a "false"
+        p->setEstado(false);
+
+        // Si el proceso es de tipo 'true' (ej. necesita GPU)
+        if (p->getTipo()) {
+            // Determinamos la cola (gpu2 o gpu3) con menos procesos
+            if (gpu2.getlongitud() < gpu3.getlongitud()) {
+                gpu2.encolar(p);
+            } else {
+                gpu3.encolar(p);
             }
-            else {
-                (gpu0.estaVacia() || gpu0.desencolar() ? gpu0 : gpu1).encolar(p);
+        } else {
+            // Si el proceso es de tipo 'false' (ej. no necesita GPU)
+            if (gpu0.getlongitud() <= gpu1.getlongitud()) {
+                gpu0.encolar(p);
+            } else {
+                gpu1.encolar(p);
             }
         }
     }
+}
 
-void Gestor::ProcesosEnGPU0(){
-	return gpu0.mostrar();
+
+int Gestor::ProcesosEnGPU0(){
+	return gpu0.getlongitud();
 }
-void Gestor::ProcesosEnGPU1(){
-	return gpu1.mostrar();
+int Gestor::ProcesosEnGPU1(){
+	return gpu1.getlongitud();
 }
-void Gestor::ProcesosEnGPU2(){
-	return gpu2.mostrar();
+int Gestor::ProcesosEnGPU2(){
+	return gpu2.getlongitud();
 }
-void Gestor::ProcesosEnGPU3(){
-	return gpu3.mostrar();
+int Gestor::ProcesosEnGPU3(){
+	return gpu3.getlongitud();
 }
+void Gestor::muestraProcesosGPUs0y1() {
+    std::cout << "ProGPU 0:" << std::endl;
+    gpu0.mostrar();
+	std::cout<< std::endl;
+
+    std::cout << "Procesos en GPU 1:" << std::endl;
+    gpu1.mostrar();
+}
+void Gestor::muestraProcesosGPUs2y3() {
+    std::cout << "ProGPU 2:" << std::endl;
+    gpu2.mostrar();
+	std::cout<< std::endl;
+
+    std::cout << "Procesos en GPU 3:" << std::endl;
+    gpu3.mostrar();
+}
+void Gestor::borraProcesosColas(){
+	 gpu0.vaciar();
+	 gpu1.vaciar();
+	 gpu2.vaciar();
+	 gpu3.vaciar();
+}
+
+
+
 
 Gestor::~Gestor()
 {
