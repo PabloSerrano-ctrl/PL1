@@ -18,6 +18,7 @@ public:
     void mostrar() const;
     void mostrarPila() const;
     void mostrarCola() const;
+	void mostrarLista() const;
     void setPrioridad(int nuevaPrioridad);
     void setEstado(bool nuevoEstado);
 

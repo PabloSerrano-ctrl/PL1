@@ -68,6 +68,13 @@ void Proceso::mostrarCola() const {
               << " y su prioridad es " << prioridad << std::endl;
 }
 
+void Proceso::mostrarLista() const{
+	std::cout << PID << "\t" 
+                  << usuario << "\t" 
+                  << tipo << "\t" 
+                  << estado << "\t" 
+                  << prioridad << std::endl;
+}
 // Método para cambiar la prioridad del proceso
 void Proceso::setPrioridad(int nuevaPrioridad) {
     prioridad=nuevaPrioridad;

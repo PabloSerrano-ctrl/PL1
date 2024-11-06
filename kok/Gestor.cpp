@@ -2,6 +2,8 @@
 #include "Proceso.hpp"
 #include "Pila.hpp"
 #include "Cola.hpp"
+#include "Lista.hpp"
+
 #include <stack>
 #include <cstdlib>
 #include <string>
@@ -94,10 +96,62 @@ void Gestor::borraProcesosColas(){
 	 gpu2.vaciar();
 	 gpu3.vaciar();
 }
+void Gestor::enlistarProcesos() {
+        std::cout << "Moviendo procesos de las colas a las listas..." << std::endl;
+        while (!gpu0.estaVacia()) {
+            Proceso* p = gpu0.desencolar();
+            p->setEstado(true) ; // Cambiar estado a ejecuci�n
+            listaNormal.insertar(p);
+        }
+        while (!gpu1.estaVacia()) {
+            Proceso* p = gpu1.desencolar();
+            p->setEstado(true); // Cambiar estado a ejecuci�n
+            listaNormal.insertar(p);
+        }
+        while (!gpu2.estaVacia()) {
+            Proceso* p = gpu2.desencolar();
+            p->setEstado(true); // Cambiar estado a ejecuci�n
+            listaTiempoReal.insertar(p);
+        }
+        while (!gpu3.estaVacia()) {
+            Proceso* p = gpu3.desencolar();
+            p->setEstado(true); // Cambiar estado a ejecuci�n
+            listaTiempoReal.insertar(p);
+        }
+        cout << "Procesos movidos a las listas." << endl;
+    }
+int Gestor::ProcesosEnListaNormal(){
+	return listaNormal.getlongitud();
+}
+
+int Gestor::ProcesosEnListaTiempoReal()
+{
+	return listaTiempoReal.getlongitud();
+}
 
 
+void Gestor::muestraProcesosNormal(){
+	listaNormal.mostrar();
+}
+void Gestor::muestraProcesosTiempoReal(){
+	listaTiempoReal.mostrar();
+}
 
+void Gestor::buscarProcesos(){
+	listaNormal.buscarMenorPrioridad();
+	listaTiempoReal.buscarMayorPrioridad();
+}
 
+void Gestor::reiniciar(){
+	pila.vaciar();
+	gpu0.vaciar();
+	gpu1.vaciar();
+	gpu2.vaciar();
+	gpu3.vaciar();
+	listaNormal.Vaciar();
+	listaTiempoReal.Vaciar();
+	
+}
 Gestor::~Gestor()
 {
 }

@@ -3,10 +3,14 @@
 #define LISTA_HPP
 
 #include "NodoLista.hpp"
+#include "Cola.hpp"
+
 
 class Lista {
-public:
+private:
     NodoLista* cabeza;
+	int longitud;
+	
 
 public:
     Lista();
@@ -15,6 +19,9 @@ public:
     Proceso* buscarPorPID(int pid);
     void eliminarPorPID(int pid);
 	void moverProcesosAListas();
-};
+	int getlongitud();
+	Proceso* buscarMenorPrioridad();
+	Proceso* buscarMayorPrioridad();
+	void Vaciar();
 
 #endif // LISTA_HPP

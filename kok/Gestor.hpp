@@ -1,6 +1,8 @@
 #include <iostream>
 #include <Pila.hpp>
 #include <Cola.hpp>
+#include <Lista.hpp>
+
 
 
 using namespace std;
