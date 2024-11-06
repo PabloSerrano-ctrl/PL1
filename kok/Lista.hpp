@@ -23,5 +23,5 @@ public:
 	Proceso* buscarMenorPrioridad();
 	Proceso* buscarMayorPrioridad();
 	void Vaciar();
-
+};
 #endif // LISTA_HPP

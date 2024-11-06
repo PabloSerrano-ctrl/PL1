@@ -1,6 +1,7 @@
 // Lista.cpp
 #include "Lista.hpp"
 #include "Cola.hpp"
+#include <iomanip> 
 #include <iostream>
 
 Lista::Lista() : cabeza(nullptr) , longitud(0) {}
@@ -14,8 +15,13 @@ void Lista::insertar(Proceso* p) {
 
 void Lista::mostrar() {
     NodoLista* actual = cabeza;
-	std::cout<< "PID\tUsuario\t\tTipo\tEstado\tPrioridad"<<std::endl;
-    while (actual != nullptr) {
+std::cout << std::left << std::setw(6) << "PID"          // Ancho de columna para PID
+              << std::setw(15) << "Usuario"                 // Ancho de columna para Usuario
+              << std::setw(25) << "Tipo"                    // Ancho de columna para Tipo
+              << std::setw(20) << "Estado"                  // Ancho de columna para Estado
+              << std::setw(10) << "Prioridad"               // Ancho de columna para Prioridad
+              << std::endl;    
+		while (actual != nullptr) {
         actual->proceso->mostrarLista();
         actual = actual->siguiente;
     }
@@ -66,7 +72,7 @@ void Lista::Vaciar(){
 
     cabeza = nullptr; // Restablecer la cabeza de la lista
 }
-}
+
 
 Proceso* Lista::buscarMenorPrioridad() {
     if (cabeza == nullptr) return nullptr; // Lista vacía
@@ -82,7 +88,8 @@ Proceso* Lista::buscarMenorPrioridad() {
         }
         actual = actual->siguiente;
     }
-	std::cout<< "Normal de menor prioridad ->\t"<< menor.mostrar() << endl;
+	std::cout<< "Normal menor prioridad ->\t"<< endl;
+	menor->mostrar();
 
     return menor;
 }
@@ -102,7 +109,8 @@ Proceso* Lista::buscarMayorPrioridad() {
         }
         actual = actual->siguiente;
     }
-	std::cout<< " Tiempo Real mayor prioridad ->\t"<< mayor.mostrar() << endl;
+	std::cout<< " Tiempo Real mayor prioridad ->\t"<< endl;
+	mayor->mostrar();
 
     return mayor;
 }
